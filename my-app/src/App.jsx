@@ -2,11 +2,9 @@ import './App.css'
 
 import Homepage from './Homepage'
 import LoginPage from './login/LoginPage'
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import RegistrationPage from './register/RegistrationPage';
 import Startup from './startup/Startup';
-
 import PitchersApp from './explore_startup/PitchersApp';
 import NetworkingEvents from './webmashup/NetworkingEvents';
 import InvestorProfilePage from './investorside/Profile';
@@ -14,13 +12,13 @@ import EditProfilePage from './investorside/EditProfilePage';
 import Layout from './search_investors/Layout';
 import InvestorConnect from './investorside/connect';
 import EditSProfile from './startup/startup_profile';
-
 import InvestorConnectj from './connect/investorConnect';
 import InvestorC from './request/investorc';
 import StartupConnect from './request/startupc';
 import StartupDashboard from './request/i_schat';
 import AcceptedInvestors from './request/s_ichat';
 import StockAnalysis from './scraping/scraping';
+
 function App() {
   return (
     <Router>

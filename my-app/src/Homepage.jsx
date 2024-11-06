@@ -1,21 +1,24 @@
-import React, { useEffect, useRef } from 'react';
+
+import { useEffect, useRef } from 'react';
 import './index.css';
 import './Homepage.css';
 import Bott from './bottom.jsx';
 import manImage from './img/man.png';
 import thumbImage from './img/bottom.png';
 import SeamlessJourney from './heading.jsx';
+import { Line, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Homepage() {
   const sectionRef1 = useRef(null);
   const sectionRef2 = useRef(null);
   const sectionRef3 = useRef(null);
+  const sectionRef4 = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const observerOptions = {
-      threshold: 0.1, // Adjust this if needed
+      threshold: 0.1,
     };
 
     const observerCallback = (entries) => {
@@ -31,15 +34,14 @@ function Homepage() {
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     // Observing multiple sections
-    [sectionRef1, sectionRef2, sectionRef3].forEach(ref => {
+    [sectionRef1, sectionRef2, sectionRef3, sectionRef4].forEach(ref => {
       if (ref.current) {
         observer.observe(ref.current);
       }
     });
 
     return () => {
-      // Clean up and ensure ref.current is valid before unobserving
-      [sectionRef1, sectionRef2, sectionRef3].forEach(ref => {
+      [sectionRef1, sectionRef2, sectionRef3, sectionRef4].forEach(ref => {
         if (ref.current instanceof Element) {
           observer.unobserve(ref.current);
         }
@@ -165,6 +167,54 @@ function Homepage() {
           </div>
         </div>
       </section>
+
+      {/* Section 4 - New Features */}
+      <section ref={sectionRef4} className="transition-up flex justify-center items-center py-16 bg-neutral-100">
+        <div className="flex flex-col items-center w-full max-w-[1200px] mx-auto">
+          <h2 className="text-3xl font-bold text-indigo-900 mb-8">
+            Unlock Your Startup's Potential
+          </h2>
+          <div className="grid grid-cols-3 gap-8 w-full">
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h3 className="text-xl font-bold text-indigo-900 mb-4">Connect and Chat</h3>
+              <p className="text-gray-700 mb-4">
+                Connect with investors and startups, and chat in real-time to discuss opportunities.
+              </p>
+              <button
+                className="px-6 py-2 text-white font-bold bg-indigo-600 rounded-full hover:bg-indigo-700 transition duration-300"
+                onClick={() => navigate('/chat')}
+              >
+                Start Chatting
+              </button>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h3 className="text-xl font-bold text-indigo-900 mb-4">Get Top News</h3>
+              <p className="text-gray-700 mb-4">
+                Stay up-to-date with the latest news and trends in the startup and investment world.
+              </p>
+              <button
+                className="px-6 py-2 text-white font-bold bg-indigo-600 rounded-full hover:bg-indigo-700 transition duration-300"
+                onClick={() => navigate('/news')}
+              >
+                View Top News
+              </button>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-lg">
+              <h3 className="text-xl font-bold text-indigo-900 mb-4">Analytics</h3>
+              <p className="text-gray-700 mb-4">
+                Get insights and analysis on the latest market trends and investment opportunities.
+              </p>
+              <button
+                className="px-6 py-2 text-white font-bold bg-indigo-600 rounded-full hover:bg-indigo-700 transition duration-300"
+                onClick={() => navigate('/analysis')}
+              >
+                View Analytics
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <SeamlessJourney />
       <div className="x">
         <Bott />
@@ -172,5 +222,5 @@ function Homepage() {
     </>
   );
 }
-export default Homepage;
 
+export default Homepage;

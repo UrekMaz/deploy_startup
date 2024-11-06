@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Treemap } from 'recharts';
 import { BarChart as ChartIcon, PieChart as PieIcon, LineChart as LineIcon, Activity } from 'lucide-react';
@@ -6,7 +7,7 @@ const StockAnalysis = () => {
   const [stockData, setStockData] = useState([]);
   const [activeTab, setActiveTab] = useState('overview');
 
-  const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#0088FE', '#00C49F'];
+  const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#A020F0', '#00FA9A'];
 
   useEffect(() => {
     fetchStockData();
@@ -20,7 +21,7 @@ const StockAnalysis = () => {
         .slice(1)
         .map(row => {
           const [ticker, companyName, currentPrice, percentChangeValue, percentChangePercent] = row.split(',');
-  
+
           return {
             ticker: ticker ? ticker.trim() : '',
             companyName: companyName ? companyName.trim() : '',
@@ -31,7 +32,7 @@ const StockAnalysis = () => {
           };
         })
         .filter(item => item.ticker); // Remove any items with missing ticker
-  
+
       console.log("Parsed Data:", parsedData); // Debugging line
       setStockData(parsedData);
     } catch (error) {
@@ -135,7 +136,7 @@ const StockAnalysis = () => {
                 <ResponsiveContainer width="100%" height={300}>
                   <PieChart>
                     <Pie
-                      data={stockData}
+                      data={stockData.slice(0, 10)} // Only display the top 10 companies
                       dataKey="marketCap"
                       nameKey="companyName"
                       cx="50%"
@@ -143,7 +144,7 @@ const StockAnalysis = () => {
                       outerRadius={100}
                       label
                     >
-                      {stockData.map((entry, index) => (
+                      {stockData.slice(0, 10).map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
