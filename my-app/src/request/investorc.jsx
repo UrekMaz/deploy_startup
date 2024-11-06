@@ -26,12 +26,9 @@ const InvestorConnect = () => {
         setError(null);
         const investorId = localStorage.getItem('userId');
         console.log(investorId);
-        const startupsResponse = await axios.get(`https://deploy-startup.vercel.app
-/api/startupN/${investorId}`);
-        const connectionsResponse = await axios.get(`https://deploy-startup.vercel.app
-/api/startup/${investorId}`);
-        const collectRespons = await axios.get(`https://deploy-startup.vercel.app
-/api/startupreq/${investorId}`);
+        const startupsResponse = await axios.get(`https://deploy-startup.vercel.app/api/startupN/${investorId}`);
+        const connectionsResponse = await axios.get(`https://deploy-startup.vercel.app/api/startup/${investorId}`);
+        const collectRespons = await axios.get(`https://deploy-startup.vercel.app/api/startupreq/${investorId}`);
         setStartups(startupsResponse.data);
         setConnectedStartups(connectionsResponse.data);
         setCollectResponse(collectRespons.data);
@@ -64,8 +61,7 @@ const InvestorConnect = () => {
 
   const handleRejectRequest = async (requestId) => {
     try {
-      await axios.put(`https://deploy-startup.vercel.app
-/api/startupreq/${requestId}`, { status: 'rejected' });
+      await axios.put(`https://deploy-startup.vercel.app/api/startupreq/${requestId}`, { status: 'rejected' });
       setCollectResponse(prevRequests => 
         prevRequests.map(request => 
           request._id === requestId 
@@ -81,8 +77,7 @@ const InvestorConnect = () => {
 
   const handleRequestStatusUpdate = async (requestId, status) => {
     try {
-      await axios.patch(`https://deploy-startup.vercel.app
-/api/startupreq/${requestId}`, { status });
+      await axios.patch(`https://deploy-startup.vercel.app/api/startupreq/${requestId}`, { status });
       setCollectResponse(prevRequests => 
         prevRequests.map(request => 
           request._id === requestId 
@@ -113,8 +108,7 @@ const InvestorConnect = () => {
         status: 'pending'
       };
 
-      const response = await axios.post('https://deploy-startup.vercel.app
-/api/startuprequest', requestData);
+      const response = await axios.post('https://deploy-startup.vercel.app/api/startuprequest', requestData);
       
       if (response.status === 201) {
         setConnectedStartups(prev => [...prev, {
