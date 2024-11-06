@@ -34,12 +34,9 @@ const StartupConnect = () => {
         setLoading(true);
         setError(null);
         const [requestsResponse, sentRequestsResponse, collectReqResponse] = await Promise.all([
-          axios.get(`https://deploy-startup.vercel.app
-/api/investorK/${startupId}`),
-          axios.get(`https://deploy-startup.vercel.app
-/api/investorrequest/startup/${startupId}`),
-          axios.get(`https://deploy-startup.vercel.app
-/api/investorreq/${startupId}`)
+          axios.get(`https://deploy-startup.vercel.app/api/investorK/${startupId}`),
+          axios.get(`https://deploy-startup.vercel.app/api/investorrequest/startup/${startupId}`),
+          axios.get(`https://deploy-startup.vercel.app/api/investorreq/${startupId}`)
         ]);
         
         setConnectionRequests(requestsResponse.data);
@@ -64,8 +61,7 @@ const StartupConnect = () => {
 
   const handleRequestAction = async (requestId, action) => {
     try {
-      const response = await axios.patch(`https://deploy-startup.vercel.app
-/api/investorrequest/${requestId}`, {
+      const response = await axios.patch(`https://deploy-startup.vercel.app/api/investorrequest/${requestId}`, {
         status: action,
         startupId,
       });
@@ -91,8 +87,7 @@ const StartupConnect = () => {
   const handleRequestSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://deploy-startup.vercel.app
-/api/investorrequest', {
+      const response = await axios.post('https://deploy-startup.vercel.app/api/investorrequest', {
         startup_id: startupId,
         investor_id: selectedInvestor._id,
         investor_name: selectedInvestor.title,
@@ -112,10 +107,8 @@ const StartupConnect = () => {
         });
         
         const [updatedRequests, updatedSentRequests] = await Promise.all([
-          axios.get(`https://deploy-startup.vercel.app
-/api/investorK/${startupId}`),
-          axios.get(`https://deploy-startup.vercel.app
-/api/investorrequest/startup/${startupId}`)
+          axios.get(`https://deploy-startup.vercel.app/api/investorK/${startupId}`),
+          axios.get(`https://deploy-startup.vercel.app/api/investorrequest/startup/${startupId}`)
         ]);
         
         setConnectionRequests(updatedRequests.data);
