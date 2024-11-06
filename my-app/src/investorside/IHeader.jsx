@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import ProfileInfo from './ProfileInfo';
+import ProfileInfo from './Profileinfo';
 
 
 function IHeader() {
