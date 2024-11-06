@@ -79,6 +79,14 @@ passport.deserializeUser(async (id, done) => {
 // Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: 'dpxltvoqv',
+  api_key: '284189174857999',
+  api_secret: 'ul6K_1_-XMuEpGBVsWMMHOIQS50'
+});
+
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://maureenmiranda22:PqxEHalWziPVqy7n@cluster0.ive9g.mongodb.net/citl?retryWrites=true&w=majority&appName=Cluster0')
@@ -265,6 +273,25 @@ app.get('/api/news', async (req, res) => {
     };
   
     try {
+
+      let profilePhotoUrl = null;
+
+      // If a profile photo is provided, upload to Cloudinary
+      if (req.file) {
+        const result = await new Promise((resolve, reject) => {
+          cloudinary.uploader.upload_stream(
+            { folder: "profile_photos", resource_type: "image" },
+            (error, result) => {
+              if (error) reject(error);
+              else resolve(result);
+            }
+          ).end(req.file.buffer);
+        });
+        
+        profilePhotoUrl = result.secure_url; // Get the secure URL of the uploaded image
+      }
+
+
       // Create or update profile based on your application logic
       const profile = new Profile({
         userId,
@@ -287,9 +314,11 @@ app.get('/api/news', async (req, res) => {
         keyAchievements: keyAchievements ? keyAchievements : [],
         investmentRange,
         topInvestments: topInvestments ? topInvestments : [],
-        profilePhoto: req.file ? req.file.buffer : null,
+
+        profilePhoto: profilePhotoUrl, // Store Cloudinary URL
         industriesOfInterest: industriesOfInterest ? industriesOfInterest : [],
-    });
+      });
+
   
       await profile.save();
       res.status(201).json({ message: 'Profile updated successfully' });
@@ -298,7 +327,7 @@ app.get('/api/news', async (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     }
   });
-   
+
 
 // Display profile route
 app.get('/profile', async (req, res) => {
@@ -324,28 +353,50 @@ app.post('/startupProfile/update', upload.single('profilePhoto'), async (req, re
     const { personalDetail, companyDetail, investors } = req.body;
 
     try {
-        // Parse JSON strings back into objects
+        // Parse the incoming JSON strings into objects
         const parsedPersonalDetail = JSON.parse(personalDetail);
         const parsedCompanyDetail = JSON.parse(companyDetail);
         const parsedInvestors = JSON.parse(investors);
+
+        let profilePhotoUrl = null;
+
+        // If there's a profile photo, upload it to Cloudinary
+        if (req.file) {
+            // Use cloudinary uploader's promise-based API
+            const result = await new Promise((resolve, reject) => {
+                cloudinary.uploader.upload_stream(
+                    {
+                        folder: "startup_profile_photos",
+                        resource_type: "image"
+                    },
+                    (error, result) => {
+                        if (error) reject(error);
+                        else resolve(result);
+                    }
+                ).end(req.file.buffer);
+            });
+
+            profilePhotoUrl = result.secure_url;
+        }
 
         const profileData = {
             ...parsedPersonalDetail,
             ...parsedCompanyDetail,
             investors: parsedInvestors,
-            profilePhoto: req.file ? req.file.buffer : null,
+            profilePhoto: profilePhotoUrl, // Store Cloudinary URL in MongoDB
         };
 
         const profile = new Startup(profileData);
-        console.log(profile);
         await profile.save();
 
-        res.status(201).json({ message: 'Profile updated successfully' });
+        res.status(201).json({ message: 'Profile updated successfully', profile });
     } catch (error) {
         console.error('Error updating profile:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+
 
 app.get('/api/startups', async (req, res) => {
     try {
