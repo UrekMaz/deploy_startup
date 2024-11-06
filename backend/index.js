@@ -107,9 +107,9 @@ app.get("/auth/google/callback", passport.authenticate('google', { failureRedire
         console.log(user.role);
         // Redirect based on user role
         if (user.role === 'investor') {
-            return res.redirect(`http://localhost:5173/investor/${user._id}`);
+            return res.redirect(`https://deploy-startup-kszd.vercel.app/investor/${user._id}`);
         } else if (user.role === 'startup') {
-            return res.redirect(`http://localhost:5173/startup_profile/${user._id}`);
+            return res.redirect(`https://deploy-startup-kszd.vercel.app/startup_profile/${user._id}`);
         } else {
             return res.status(400).json({ message: 'Unknown role' });
         }
