@@ -22,7 +22,7 @@ const jwt = require('jsonwebtoken');
 app.use(cors({
     credentials: true,
     methods: ["GET", "POST"],
-    origin: 'https://deploy-mern-1whq.vercel.app',
+    origin: 'https://deploy-startup-kszd.vercel.app',
 }));
 
 app.use(express.json());
