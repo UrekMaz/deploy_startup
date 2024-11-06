@@ -27,9 +27,9 @@ function LoginPage() {
         setSuccessMessage('Login successful');
         setErrorMessage('');
         
-        // Use the redirect URL returned from the backend
+        // Use the navigate function from react-router-dom for redirection
         const { redirectUrl } = response.data;
-        window.location.href = redirectUrl;
+        navigate(redirectUrl);
       }
     } catch (error) {
       if (error.response) {

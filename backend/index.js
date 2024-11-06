@@ -142,9 +142,9 @@ app.post('/authorize/login', async (req, res) => {
             // Determine redirect URL based on user role
             let redirectUrl;
             if (user.role === 'investor') {
-                redirectUrl = `https://deploy-startup-kszd.vercel.app/investor/${user._id}`;
+                redirectUrl = `/investor/${user._id}`;
             } else if (user.role === 'startup') {
-                redirectUrl = `https://deploy-startup-kszd.vercel.app/startup_profile/${user._id}`;
+                redirectUrl = `/startup_profile/${user._id}`;
             } else {
                 return res.status(400).json({ message: 'Unknown role' });
             }
