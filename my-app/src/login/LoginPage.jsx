@@ -18,7 +18,7 @@ function LoginPage() {
     e.preventDefault();
   
     try {
-      const response = await axios.post('http://localhost:3000/authorize/login', {
+      const response = await axios.post('https://deploy-startup.vercel.app/authorize/login', {
         userId: username,
         password: password,
       });
@@ -43,7 +43,7 @@ function LoginPage() {
 
   const handleGoogleLogin = () => {
     if (role) {
-      window.location.href = `http://localhost:3000/auth/google?role=${role}`;
+      window.location.href = `https://deploy-startup.vercel.app/auth/google?role=${role}`;
     } else {
       setErrorMessage('Please select a role before logging in.');
     }

@@ -28,7 +28,7 @@ const InvestorConnectj = () => {
     const fetchStartups = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/api/startups');
+        const response = await fetch('https://deploy-startup.vercel.app/api/startups');
         if (!response.ok) {
           throw new Error('Failed to fetch startups');
         }

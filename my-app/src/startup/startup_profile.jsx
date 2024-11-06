@@ -80,7 +80,7 @@ const EditSProfile = () => {
     
 
     try {
-      const response = await axios.post('http://localhost:3000/startupProfile/update', formData, {
+      const response = await axios.post('https://deploy-startup.vercel.app/startupProfile/update', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

@@ -24,7 +24,7 @@ const Startup = () => {
     const fetchStartupData = async () => {
       try {
         localStorage.setItem('userId', userId);
-        const response = await axios.get(`http://localhost:3000/find/startups?userId=${userId}`);
+        const response = await axios.get(`https://deploy-startup.vercel.app/find/startups?userId=${userId}`);
         setStartupData(response.data);
         
         // Generate timeline data for the last 6 months

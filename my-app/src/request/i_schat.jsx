@@ -5,7 +5,8 @@ import axios from 'axios';
 import IHeader from '../investorside/IHeader';
 
 // Configure axios defaults
-axios.defaults.baseURL = 'http://localhost:3000'; // Update this to match your backend URL
+axios.defaults.baseURL = 'https://deploy-startup.vercel.app
+'; // Update this to match your backend URL
 axios.defaults.withCredentials = true;
 
 const StartupDashboard = () => {

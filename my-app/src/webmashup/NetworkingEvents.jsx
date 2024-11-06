@@ -11,7 +11,7 @@ const NewsFeed = () => {
     const fetchNews = async () => {
       try {
         console.log("Fetching news articles...");
-        const response = await axios.get('http://localhost:3000/api/news');
+        const response = await axios.get('https://deploy-startup.vercel.app/api/news');
         console.log(response.data.articles);
         setArticles(response.data.articles.slice(0, 15));
       } catch (err) {

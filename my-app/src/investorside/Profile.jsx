@@ -22,7 +22,7 @@ const InvestorProfilePage = () => {
       try {
         console.log("User ID:", userId);
         localStorage.setItem('userId', userId);
-        const response = await axios.get('http://localhost:3000/profile', {
+        const response = await axios.get('https://deploy-startup.vercel.app/profile', {
           params: { userId },
         });
         setProfile(response.data);

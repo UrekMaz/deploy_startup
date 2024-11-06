@@ -26,7 +26,7 @@ function RegistrationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/authorize/register', formData);
+      const response = await axios.post('https://deploy-startup.vercel.app/authorize/register', formData);
       alert(response.data.message);
       const userId = response.data._id;
       console.log('User ID:', userId);
