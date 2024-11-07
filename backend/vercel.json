@@ -6,14 +6,11 @@
         "use": "@vercel/node"
         
       }],
-      "routes": [
-        { "src": "/investor_profile/([^/]+)", "dest": "/index.html" },
-        { "src": "/startup_profile/([^/]+)", "dest": "/index.html" },
-        {
-          "src": "/(.*)",
-          "dest": "/index.js"
-        }
-      ]
+      "rewrites": [
+    { "source": "/investor_profile/:userId", "destination": "/index.html" },
+    { "source": "/startup_profile/:userId", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/index.js" }
+  ]
     
 }
 
