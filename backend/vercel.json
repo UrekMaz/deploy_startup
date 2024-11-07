@@ -10,6 +10,9 @@
     { "source": "/investor_profile/:userId", "destination": "/index.html" },
     { "source": "/startup_profile/:userId", "destination": "/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "redirects": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
     
 }
