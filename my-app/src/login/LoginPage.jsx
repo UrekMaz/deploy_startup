@@ -21,6 +21,8 @@ function LoginPage() {
       const response = await axios.post('https://deploy-startup.vercel.app/authorize/login', {
         userId: username,
         password: password,
+      }, {
+        withCredentials: true
       });
   
       if (response.status === 200) {
