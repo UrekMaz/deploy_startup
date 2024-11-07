@@ -22,7 +22,7 @@ const jwt = require('jsonwebtoken');
 app.use(cors({
     credentials: true,
     methods: ["GET", "POST"],
-    origin: 'https://deploy-startup-kszd.vercel.app',
+    origin: 'https://deploy-startup-6sv4.vercel.app',
 }));
 
 app.use(express.json());
@@ -107,9 +107,9 @@ app.get("/auth/google/callback", passport.authenticate('google', { failureRedire
         console.log(user.role);
         // Redirect based on user role
         if (user.role === 'investor') {
-            return res.redirect(`https://deploy-startup-kszd.vercel.app/investor/${user._id}`);
+            return res.redirect(`https://deploy-startup-6sv4.vercel.app/investor/${user._id}`);
         } else if (user.role === 'startup') {
-            return res.redirect(`https://deploy-startup-kszd.vercel.app/startup_profile/${user._id}`);
+            return res.redirect(`https://deploy-startup-6sv4.vercel.app/startup_profile/${user._id}`);
         } else {
             return res.status(400).json({ message: 'Unknown role' });
         }
